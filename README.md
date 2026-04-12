@@ -1,6 +1,6 @@
 # Waste Classifier
 
-A deep learning project for classifying waste images into categories such as cardboard, glass, metal, paper, plastic, and trash using a convolutional neural network (CNN) built with PyTorch.
+A deep learning project for classifying waste images into 6 categories (cardboard, glass, metal, paper, plastic, and trash) using a convolutional neural network built with PyTorch.
 
 ## Features
 
@@ -18,16 +18,21 @@ A deep learning project for classifying waste images into categories such as car
 - Plastic
 - Trash
 
+## Results
+
+Achieved **80.3% test accuracy** trained from scratch on 2,527 images over 100 epochs. No pretrained weights or transfer learning were used.
+
 ## Project Structure
 
 ```
 src/
 	model.py      # CNN model definition and class names
-	train.py      # Training and validation loop
+	train.py      # Training/validation loop
 	predict.py    # Image prediction script
 	utils.py      # Data loading and preprocessing utilities
 data/
-	# Place your dataset here (expects TrashNet format)
+	# Place your dataset here (expects TrashNet dataset)
+waste_classifier.ipynb  # training notebook with experimentation and results
 requirements.txt
 README.md
 ```
@@ -72,3 +77,10 @@ python src/predict.py --image path/to/image.jpg --model path/to/model.pth
 - Numpy
 
 (See `requirements.txt` for full list.)
+
+## Future Improvements
+
+- Add batch normalization to stabilize training
+- Add a learning rate scheduler to reduce val accuracy bouncing in later epochs
+- Balance class distribution (paper: 594 images vs trash: 137 images)
+- Deploy as a full stack web app with a React frontend and Flask backend
