@@ -65,7 +65,7 @@ The script will automatically use GPU if available.
 To classify a new image:
 
 ```
-python src/predict.py --image path/to/image.jpg --model path/to/model.pth
+python -m src.predict --image path/to/image.jpg --model path/to/model.pth
 ```
 
 ## Requirements
