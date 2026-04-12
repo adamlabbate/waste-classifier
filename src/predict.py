@@ -2,6 +2,13 @@ import torch
 import torchvision.transforms as transforms
 from PIL import Image
 from src.model import WasteClassifier, CLASS_NAMES
+import argparse
+
+device = torch.device(
+        "cuda" if torch.cuda.is_available() else
+        "mps" if torch.backends.mps.is_available() else
+        "cpu"
+    )
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -23,3 +30,15 @@ def predict(image_path, model, device):
     prediction = output.argmax(dim=1).item()
 
   return CLASS_NAMES[prediction]
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--image', required=True)
+    parser.add_argument('--model', required=True)
+    args = parser.parse_args()
+
+    model = WasteClassifier().to(device)
+    model.load_state_dict(torch.load(args.model, map_location=device))
+
+    print(predict(args.image, model, device))
