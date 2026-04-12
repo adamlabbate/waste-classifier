@@ -48,7 +48,7 @@ README.md
 	 ```
 
 3. **Prepare the dataset**  
-	 Place your dataset in `data/TrashNet/dataset-resized` following the [TrashNet](https://github.com/garythung/trashnet) folder structure.
+	 Place your dataset in `data/TrashNet/dataset-resized` (found [here](https://github.com/garythung/trashnet/blob/master/data/dataset-resized.zip)) 
 
 ## Training
 
