@@ -55,7 +55,7 @@ README.md
 To train the model:
 
 ```
-python src/train.py
+python -m src.train
 ```
 
 The script will automatically use GPU if available.

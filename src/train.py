@@ -69,10 +69,9 @@ for epoch in range(epochs):
     epoch_val_acc = val_correct / val_total
 
     if epoch_val_acc > best_val_acc:
-    best_val_acc = epoch_val_acc
-    torch.save(model.state_dict(), 'waste_classifier.pth')
-    print(f"  Model saved with val acc: {best_val_acc:.4f}")
-    
+        best_val_acc = epoch_val_acc
+        torch.save(model.state_dict(), 'waste_classifier.pth')
+        print(f"  Model saved with val acc: {best_val_acc:.4f}")
+
     print(f"Epoch {epoch+1}/{epochs} - Loss: {epoch_loss:.4f} - Acc: {epoch_acc:.4f} - Val Loss: {epoch_val_loss:.4f} - Val Acc: {epoch_val_acc:.4f}")
 
-torch.save(model.state_dict(), 'waste_classifier.pth')
