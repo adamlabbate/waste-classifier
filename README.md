@@ -1,86 +1,92 @@
 # Waste Classifier
 
-A deep learning project for classifying waste images into 6 categories (cardboard, glass, metal, paper, plastic, and trash) using a convolutional neural network built with PyTorch.
-
-## Features
-
-- Custom CNN model for image classification
-- Training, validation, and testing pipeline
-- Image prediction script for new images
-- Utilities for data loading and preprocessing
-
-## Waste Categories
-
-- Cardboard
-- Glass
-- Metal
-- Paper
-- Plastic
-- Trash
+A full stack web app that classifies waste images into 6 categories using a custom convolutional neural network trained from scratch with PyTorch.
 
 ## Results
 
-Achieved **80.3% test accuracy** trained from scratch on 2,527 images over 100 epochs. No pretrained weights or transfer learning were used.
+**80.3% test accuracy** trained on 2,527 images over 100 epochs. No pretrained weights or transfer learning.
+
+## Stack
+
+- **ML model** — custom CNN built with PyTorch, trained on the [TrashNet](https://github.com/garythung/trashnet) dataset
+- **Backend** — Flask REST API that runs inference and returns predictions as JSON
+- **Frontend** — React (Vite) with drag-and-drop image upload and live results
+
+## Waste Categories
+
+Cardboard · Glass · Metal · Paper · Plastic · Trash
 
 ## Project Structure
 
 ```
 src/
-	model.py      # CNN model definition and class names
-	train.py      # Training/validation loop
-	predict.py    # Image prediction script
-	utils.py      # Data loading and preprocessing utilities
-data/
-	# Place your dataset here (expects TrashNet dataset)
-waste_classifier.ipynb  # training notebook with experimentation and results
+    model.py      # CNN architecture and class names
+    train.py      # Training and validation loop
+    predict.py    # Inference function
+    utils.py      # Data loading and transforms
+backend/
+    app.py        # Flask server — POST /predict endpoint
+frontend/
+    src/
+        App.jsx       # Root React component
+        App.css       # Component styles
+        index.css     # Global styles and CSS variables
+        main.jsx      # App entry point
+waste_classifier.ipynb  # Training notebook with experiments and results
 requirements.txt
-README.md
 ```
 
 ## Setup
 
-1. **Clone the repository** and navigate to the project folder.
+1. **Clone the repo** and create a virtual environment:
 
-2. **Install dependencies** (preferably in a virtual environment):
+    ```bash
+    python -m venv venv
+    source venv/bin/activate
+    ```
 
-	 ```
-	 pip install -r requirements.txt
-	 ```
+2. **Install Python dependencies:**
 
-3. **Prepare the dataset**  
-	 Place your dataset in `data/TrashNet/dataset-resized` (found [here](https://github.com/garythung/trashnet/blob/master/data/dataset-resized.zip)) 
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-## Training
+3. **Install frontend dependencies:**
 
-To train the model:
+    ```bash
+    cd frontend && npm install
+    ```
 
+## Running the app
+
+Start the Flask backend from the project root:
+
+```bash
+python backend/app.py
 ```
+
+In a separate terminal, start the React frontend:
+
+```bash
+cd frontend && npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Training your own model
+
+Place the TrashNet dataset at `data/TrashNet/dataset-resized` ([download here](https://github.com/garythung/trashnet/blob/master/data/dataset-resized.zip)), then run:
+
+```bash
 python -m src.train
 ```
 
-The script will automatically use GPU if available.
+The script automatically uses GPU (CUDA or Apple MPS) if available.
 
-## Prediction
+## CLI prediction
 
-To classify a new image:
+To classify an image directly without the web app:
 
+```bash
+python -m src.predict --image path/to/image.jpg --model waste_classifier.pth
 ```
-python -m src.predict --image path/to/image.jpg --model path/to/model.pth
-```
-
-## Requirements
-
-- Python 3.8+
-- PyTorch
-- Torchvision
-- Pillow
-- Numpy
-
-(See `requirements.txt` for full list.)
-
-## Future Improvements
-
-- Add batch normalization to stabilize training
-- Add a learning rate scheduler to reduce val accuracy bouncing in later epochs
-- Balance class distribution (paper: 594 images vs trash: 137 images)
-- Deploy as a full stack web app with a React frontend and Flask backend
