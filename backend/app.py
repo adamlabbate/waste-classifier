@@ -5,10 +5,11 @@ import tempfile
 import torch
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from huggingface_hub import hf_hub_download
 from src.model import WasteClassifier
 from src.predict import predict, device
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), '..', 'waste_classifier.pth')
+MODEL_PATH = hf_hub_download(repo_id="adamlabbate/waste-classifier", filename="waste_classifier.pth")
 
 app = Flask(__name__)
 CORS(app)
