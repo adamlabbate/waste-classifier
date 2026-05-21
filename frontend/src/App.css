@@ -12,6 +12,11 @@
 
 .header h1 {
   margin-bottom: 8px;
+  padding: 6px 0 12px;
+  background: linear-gradient(135deg, #aa3bff 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
@@ -25,7 +30,7 @@
   width: 100%;
   max-width: 500px;
   min-height: 260px;
-  border: 2px dashed var(--border);
+  border: 2px dashed var(--accent-border);
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -33,6 +38,7 @@
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
   overflow: hidden;
+  background: var(--accent-bg);
 }
 
 .upload-zone:not(.has-preview):hover,
@@ -106,12 +112,13 @@
   padding: 11px 36px;
   font-size: 16px;
   font-family: var(--sans);
-  background: var(--accent);
+  background: linear-gradient(135deg, #aa3bff 0%, #6366f1 100%);
   color: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: opacity 0.2s;
+  box-shadow: 0 4px 14px rgba(170, 59, 255, 0.35);
 }
 
 .classify-btn:hover {
